@@ -61,6 +61,14 @@
           "card_text": "拿取此行动格上的所有战士。拥有者拿取 1 个战士。此建筑放入场上时以及每轮开始时，在此行动格上放置 2 个战士。",
           "possible_lore_text": "商队频繁抵达这座露天广场，随行而来的还有寻找工作的健壮战士。",
           "building_location": "南区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "商队广场",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -112,6 +120,14 @@
           "card_text": "拿取 1 个法师和 1 张阴谋卡。拥有者拿取 1 张阴谋卡。",
           "possible_lore_text": "神秘的法师马瑞尔居住在这座阴森的高塔中。",
           "building_location": "海区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "龙塔",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -164,6 +180,14 @@
           "card_text": "拿取 2 个战士和 1 个法师。拥有者拿取 1 个战士或 1 个法师。",
           "possible_lore_text": "这座庭院位于深水城城堡以北，既是城市守卫骑巡队的集结地，也是不期而成的吟游诗人练习厅。",
           "building_location": "城堡区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "蹄踵庭院",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -215,6 +239,14 @@
           "card_text": "拿取此行动格上的所有金币。拥有者拿取 2 金币。此建筑放入场上时以及每轮开始时，在此行动格上放置 4 金币。",
           "possible_lore_text": "在这座赌场里，最高奖品是一只盛满神秘财富的金角号。",
           "building_location": "贸易区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "金号角赌场",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -269,6 +301,14 @@
           "card_text": "拿取 2 个盗贼和 2 金币。拥有者拿取 1 个盗贼。",
           "possible_lore_text": "这家看似合法的商号，是深水城最成功销赃人之一丘尔丹·赫姆斯塔的据点。",
           "building_location": "港口区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "赫尔姆斯塔仓库",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -320,6 +360,14 @@
           "card_text": "从崖望旅馆拿取 1 张面朝上的任务卡。你可以立即完成该任务；若如此做，获得 4 VP。拥有者获得 2 VP。",
           "possible_lore_text": "在这座公共公园里，你总能找到冒险者讲述自己的壮举。",
           "building_location": "海区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "英雄花园",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -373,6 +421,14 @@
           "card_text": "拿取 1 个战士和任意 1 个冒险者。拥有者拿取 1 个战士。",
           "possible_lore_text": "隐藏巨龙宝藏的传闻把冒险者吸引到这家旅馆，但让他们留下的是美酒。",
           "building_location": "南区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "良魂旅馆",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -425,6 +481,14 @@
           "card_text": "拿取 1 个牧师和 2 个战士。拥有者拿取 1 个牧师或 1 个战士。",
           "possible_lore_text": "深水城最大的神龛供奉着战争之主坦帕斯。",
           "building_location": "海区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "英雄神殿",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -478,6 +542,14 @@
           "card_text": "拿取 1 个牧师，并从崖望旅馆拿取 1 张面朝上的任务卡。拥有者拿取 2 金币。",
           "possible_lore_text": "这座镀金神殿吸引着寻求苏伦恩的恩典与力量的朝圣者。",
           "building_location": "海区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "月神殿",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -529,6 +601,14 @@
           "card_text": "支付 2 金币。拿取共 2 个牧师/法师，任意组合。拥有者拿取 2 金币。",
           "possible_lore_text": "这座华美高塔献给魔法女神密斯特拉。",
           "building_location": "海区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "奇术之塔",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -580,6 +660,14 @@
           "card_text": "拿取此行动格上的所有盗贼。拥有者拿取 1 个盗贼。此建筑放入场上时以及每轮开始时，在此行动格上放置 2 个盗贼。",
           "possible_lore_text": "这里曾是杂耍艺人与滑稽演员表演之处；如今，丝绸街与白银街之间的这条小巷已经变得危险得多。",
           "building_location": "城堡区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "小丑巷",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -632,6 +720,14 @@
           "card_text": "拿取 2 个盗贼和 1 个法师。拥有者拿取 1 个盗贼或 1 个法师。",
           "possible_lore_text": "这所学院是学习吟游技艺的最佳地点之一，在整个剑湾都享有盛名。",
           "building_location": "城堡区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "新奥拉姆学院",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -685,6 +781,14 @@
           "card_text": "拿取任意 1 个冒险者和 2 金币。拥有者获得 2 VP。",
           "possible_lore_text": "深水城与矿业城镇米拉巴之间的所有贸易，最终都会流经北门。",
           "building_location": "北区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "北大门",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -736,6 +840,14 @@
           "card_text": "拿取大使。下一轮开始时，你先于其他所有玩家指派大使。拥有者获得 2 VP。",
           "possible_lore_text": "这座白色大理石宫殿是领主统治的闪耀象征，也容纳着众多使馆。",
           "building_location": "城堡区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "深水城宫殿",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -789,6 +901,14 @@
           "card_text": "拿取 1 个战士、1 个盗贼和 2 金币。拥有者拿取 1 个战士或 1 个盗贼。",
           "possible_lore_text": "走私者曾利用这条短巷，在城市守卫眼皮底下搬运货物。",
           "building_location": "海区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "隐秘小径",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -840,6 +960,14 @@
           "card_text": "拿取此行动格上的所有牧师。拥有者获得 2 VP。此建筑放入场上时以及每轮开始时，在此行动格上放置 1 个牧师。",
           "possible_lore_text": "八座金色尖塔装点着这座围墙花园神殿；它献给黎明之神。",
           "building_location": "城堡区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "黎明尖塔神殿",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -891,6 +1019,14 @@
           "card_text": "支付 2 金币。拿取共 4 个战士/盗贼，任意组合。拥有者拿取 2 金币。",
           "possible_lore_text": "这里是疑似深水城领主、放债人米尔特的私人码头。",
           "building_location": "城堡区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "走私者码头",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -942,6 +1078,14 @@
           "card_text": "场上每有 1 个建筑板块，你获得 1 金币。拥有者拿取 2 金币。",
           "possible_lore_text": "这里是木匠、屋顶匠与泥瓦匠行会的会所；贵族们争相让自家别墅压过邻居，使这个行会变得极为富有。",
           "building_location": "南区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "石屋行会",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -993,6 +1137,14 @@
           "card_text": "将任意 2 个冒险者返回供应区。拿取任意 3 个冒险者。拥有者拿取 2 金币。",
           "possible_lore_text": "这家昂贵夜总会得名于它最初的购价：从一名舞者服装上扯下的三颗黑珍珠。",
           "building_location": "港口区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "三珠夜总会",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -1045,6 +1197,14 @@
           "card_text": "拿取 1 个牧师和 2 个盗贼。拥有者拿取 1 个牧师或 1 个盗贼。",
           "possible_lore_text": "那些从地脉迷城深处幸存归来的人向泰摩拉捐献，迅速支付了这座神殿的建造费用。",
           "building_location": "海区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "幸运女神塔",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -1094,6 +1254,14 @@
           "card_text": "拿取此行动格上的所有法师。拥有者拿取 1 张阴谋卡。此建筑放入场上时以及每轮开始时，在此行动格上放置 1 个法师。",
           "possible_lore_text": "这座宏伟建筑是守望法师与护卫者结社的总部。",
           "building_location": "城堡区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "秩序之塔",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -1145,6 +1313,14 @@
           "card_text": "拿取此行动格上的所有 VP 并计分。从崖望旅馆拿取 1 张面朝上的任务卡。拥有者获得 2 VP。此建筑放入场上时以及每轮开始时，在此行动格上放置 3 VP。",
           "possible_lore_text": "只要对这块路标说出目的地，道路就会向你显现。",
           "building_location": "南区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "指路魔牌",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -1194,6 +1370,14 @@
           "card_text": "拿取任意 2 个冒险者。拥有者拿取任意 1 个冒险者。",
           "possible_lore_text": "这家著名旅馆拥有通向地脉迷城的唯一已知公共入口，吸引着各式各样的冒险者。",
           "building_location": "城堡区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "哈欠门酒馆",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -1245,6 +1429,14 @@
           "card_text": "选择一个已有对手代理人的行动格。你执行该行动格的行动，视同你已将 1 名代理人指派到那里。拥有者获得 2 VP。",
           "possible_lore_text": "佐阿之星是书吏、文士与书记员行会的会所，也是任何需要契约或其他文书者的目的地。",
           "building_location": "贸易区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "佐尔斯塔行会",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -1859,6 +2051,14 @@
           "card_text": "拿取 3 个盗贼、5 金币和 1 个腐化。拥有者拿取 3 金币。",
           "possible_lore_text": "他们盗掘深水城亡者之城的墓穴与坟冢，储备最适合复生术使用的尸体。",
           "building_location": "下层贸易道"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "墓钥尸坊",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -1913,6 +2113,14 @@
           "card_text": "拿取任意 1 个冒险者、5 金币、1 个腐化，并拿取 1 张面朝上的任务卡。拥有者获得 3 VP。",
           "possible_lore_text": "在这家旅馆里，安静与安全价格高昂，各式致命毒药也是如此。",
           "building_location": "下层心区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "深火旅馆",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -1964,6 +2172,14 @@
           "card_text": "从你的酒馆移除 1 个腐化，并将其放到任意行动格上。拥有者获得 2 VP。",
           "possible_lore_text": "隐蔽陷坑、燃油喷口和自动上弦的弹簧刀刃，都是这家店出售的商品样例。",
           "building_location": "中央贸易道"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "探渊者陷阱坊",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2015,6 +2231,14 @@
           "card_text": "返回任意 1 个冒险者。拿取 3 个法师和 1 个腐化。拥有者拿取被返回的冒险者。",
           "possible_lore_text": "未经灵吸怪护送的不速之客，会被心灵感应礼貌地劝离，因为管理方无法保证他们的安全。",
           "building_location": "上层心区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "额叶秘所",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2069,6 +2293,14 @@
           "card_text": "拿取 1 个牧师、1 个战士、1 个盗贼、1 个法师和 1 个腐化。拥有者拿取任意 1 个冒险者。",
           "possible_lore_text": "这座肮脏棚屋除了烈性到极点的酒，以及一群随时找理由见血的黑心刺客，几乎没什么可给访客。",
           "building_location": "下层心区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "地狱犬之颚酒馆",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2120,6 +2352,14 @@
           "card_text": "拿取此行动格上的所有腐化。每拿取 1 个腐化，将 1 名代理人返回你的代理人池。拥有者获得 2 VP。此建筑放入场上时以及每轮开始时，在此行动格上放置 1 个腐化。",
           "possible_lore_text": "定制怪物专门创造各种体型的杂交怪物与生物，最出名的是赤褐枭怪，一种由可怖枭熊和锈蚀怪杂交而成的怪物。",
           "building_location": "中央心区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "怪物定制工坊",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2169,6 +2409,14 @@
           "card_text": "归还 1 个腐化。打出 1 张阴谋卡。拥有者拿取 1 张阴谋卡。",
           "possible_lore_text": "这里收藏着费伦各地政府印玺的大量蜡印，一些骷髅港最出色的伪造文书便在此制成。",
           "building_location": "中央贸易道"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "毒笔秘会",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2220,6 +2468,14 @@
           "card_text": "从你的酒馆移除至多 2 个腐化，并将其移出游戏。拥有者获得 3 VP。",
           "possible_lore_text": "这座僻静神殿群在数百年前与骷髅港分离，由伊莉丝翠的选民建造，囊括了原萨尔高斯飞地的一处孤立街区。",
           "building_location": "骷髅港东北方"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "幽暗少女步行道",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2273,6 +2529,14 @@
           "card_text": "归还 1 个腐化。拿取 1 个牧师。拥有者拿取 1 个牧师。",
           "possible_lore_text": "在骷髅港，信徒能安全聚会的地方少之又少。圣坛一旦建立，入口便会受到强大魔法保护，一旦大门被突破就会警示领袖。",
           "building_location": "这是秘密，我们不告诉你！"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "隐秘圣所",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2327,6 +2591,14 @@
           "card_text": "拿取 3 个战士、1 个牧师和 1 个腐化。拥有者拿取 3 金币。",
           "possible_lore_text": "曾经租用一爪僵尸很容易。如今这门生意沉寂了，除非你知道该问谁。",
           "building_location": "下层心区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "斯拉丁顶尖僵尸工坊",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2380,6 +2652,14 @@
           "card_text": "归还 1 个腐化。拿取 1 金币。拥有者拿取 2 金币。",
           "possible_lore_text": "在骷髅港遗失的任何东西，最终都会来到这家拥挤杂乱的小店。带着最珍贵神器而来的顾客，离开时往往只换得一点小钱，却浑然不觉。",
           "building_location": "下港区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "辛布尔温当铺",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2435,6 +2715,14 @@
           "card_text": "拿取 3 个战士、3 个盗贼和 1 个腐化。拥有者拿取 1 个战士和 1 个盗贼。",
           "possible_lore_text": "掷下的铁手套以骷髅港最肮脏、最卑劣的斗坑之一闻名，每十日通常至少上演一次骇人的暴力格斗。",
           "building_location": "下层心区"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "铁拳飞飞飞角斗场",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2642,6 +2930,14 @@
           "card_text": "拿取 5 金币，并打出 1 张阴谋卡。拥有者拿取 2 金币。",
           "possible_lore_text": "这位梅莱尔金矮人国王的陵墓绝不是可以轻率踏足之地。",
           "building_location": "萨尔高斯层"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "贝尔克拉姆之墓",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2695,6 +2991,14 @@
           "card_text": "拿取 4 个战士。从供应区在 2 个不同的行动格上各放置 1 个战士。拥有者拿取 2 个战士。",
           "possible_lore_text": "这座防御要塞满布陷阱，可在你退入其中时逐一布设。",
           "building_location": "上层地城层"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "血手要塞",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2746,6 +3050,14 @@
           "card_text": "拿取任意 1 个冒险者。打出 1 张阴谋卡。拥有者获得 2 VP。",
           "possible_lore_text": "这是眼魔犯罪领主珊娜萨维持的两座设防据点之一。",
           "building_location": "萨尔高斯层"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "眼魔巢穴",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2795,6 +3107,14 @@
           "card_text": "打出 3 张阴谋卡。拥有者拿取 1 张阴谋卡。",
           "possible_lore_text": "这处吸血鬼巢穴充满了从地面一直延伸到天花板的石柱，地面覆盖着旋转的遮蔽雾气。",
           "building_location": "地城层"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "万柱厅",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2847,6 +3167,14 @@
           "card_text": "拿取 1 个战士和 1 个盗贼，然后打出 1 张阴谋卡。拥有者拿取 1 个战士或 1 个盗贼。",
           "possible_lore_text": "这间泛着紫光的厅室有两排相对的高大石王座，每排二十六座；每个发光的金色王座上都坐着一具骷髅。",
           "building_location": "地城层"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "诸王沉眠之厅",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2900,6 +3228,14 @@
           "card_text": "从你的酒馆移除任意 3 个冒险者，并将这些冒险者分别放到 3 个不同的行动格上。获得 10 VP。拥有者获得 2 VP。",
           "possible_lore_text": "朝东的基座上矗立着三尊十六英尺高的石像，上面刻着“伊琳德朗”、“茹阿辛达尔”和“翁萨拉斯”三个名字。",
           "building_location": "地城层"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "三领主之厅",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -2953,6 +3289,14 @@
           "card_text": "拿取 2 个法师。从供应区将 1 个法师放到 1 个行动格上。拥有者拿取 1 个法师。",
           "possible_lore_text": "哈拉斯特传说中的藏书馆是一处受结界保护的死亡陷阱。对蠢到敢进入的人来说，书架中隐藏的危险比书中写下的致命秘密还多。",
           "building_location": "地城层"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "大藏书馆",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -3005,6 +3349,14 @@
           "card_text": "弃掉 1 张非强制任务卡。拿取 1 个战士、1 个盗贼和任意 1 个冒险者。拥有者拿取任意 1 个冒险者。",
           "possible_lore_text": "这间魔法房间中施有恒久黑暗术。许多粗心的冒险者在寻找离开地脉迷城的单向传送门时迷失于此。",
           "building_location": "萨尔高斯层"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "失落洞窟",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -3058,6 +3410,14 @@
           "card_text": "拿取 4 个盗贼。从供应区在 2 个不同的行动格上各放置 1 个盗贼。拥有者拿取 2 个盗贼。",
           "possible_lore_text": "影贼逃离城市时，他们组织的一部分在地脉迷城中开凿出一处家园。他们仍在那里，只是其中已少有人仍是人类。",
           "building_location": "终点层"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "暮影要塞",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -3109,6 +3469,14 @@
           "card_text": "拿取 4 金币并抽 2 张阴谋卡。弃掉 2 张阴谋卡。拥有者抽 1 张阴谋卡。",
           "possible_lore_text": "这里曾是梅莱尔金人的秘银矿，后来成了卓布伦德构装体的试验场。它们彼此交战，也攻击任何试图盗取矿井遗留物的鲁莽旅人。",
           "building_location": "农场层"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "特罗布里恩德坟场",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -3162,6 +3530,14 @@
           "card_text": "拿取 8 金币。从供应区在 2 个不同的行动格上各放置 2 金币。拥有者拿取 4 金币。",
           "possible_lore_text": "足石上的铭文写着：“长眠于此者，高王阿桑格，梅拉之子，烬谷之主，他本不该倒下。”",
           "building_location": "地城层"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "大公墓",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,
@@ -3215,6 +3591,14 @@
           "card_text": "拿取 2 个牧师。从供应区将 1 个牧师放到 1 个行动格上。拥有者拿取 1 个牧师。",
           "possible_lore_text": "威洛森林生长在地脉迷城深处；在那片奇异森林中，玛拉信仰的入门者在智慧室研究野兽。",
           "building_location": "农场层"
+        },
+        "zh_printed": {
+          "label": "印刷版",
+          "source": "User-provided printed building names, 2026-06-02",
+          "name": "智慧之室",
+          "card_text": "",
+          "possible_lore_text": "",
+          "building_location": ""
         }
       },
       "variant_count": 1,

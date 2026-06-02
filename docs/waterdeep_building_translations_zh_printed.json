@@ -1,0 +1,151 @@
+{
+  "version_id": "zh_printed",
+  "label": "印刷版",
+  "source": "User-provided printed building names, 2026-06-02",
+  "cards": {
+    "LW_Buildings_01": {
+      "name": "商队广场"
+    },
+    "LW_Buildings_02": {
+      "name": "龙塔"
+    },
+    "LW_Buildings_03": {
+      "name": "蹄踵庭院"
+    },
+    "LW_Buildings_04": {
+      "name": "金号角赌场"
+    },
+    "LW_Buildings_05": {
+      "name": "赫尔姆斯塔仓库"
+    },
+    "LW_Buildings_06": {
+      "name": "英雄花园"
+    },
+    "LW_Buildings_07": {
+      "name": "良魂旅馆"
+    },
+    "LW_Buildings_08": {
+      "name": "英雄神殿"
+    },
+    "LW_Buildings_09": {
+      "name": "月神殿"
+    },
+    "LW_Buildings_10": {
+      "name": "奇术之塔"
+    },
+    "LW_Buildings_11": {
+      "name": "小丑巷"
+    },
+    "LW_Buildings_12": {
+      "name": "新奥拉姆学院"
+    },
+    "LW_Buildings_13": {
+      "name": "北大门"
+    },
+    "LW_Buildings_14": {
+      "name": "深水城宫殿"
+    },
+    "LW_Buildings_15": {
+      "name": "隐秘小径"
+    },
+    "LW_Buildings_16": {
+      "name": "黎明尖塔神殿"
+    },
+    "LW_Buildings_17": {
+      "name": "走私者码头"
+    },
+    "LW_Buildings_18": {
+      "name": "石屋行会"
+    },
+    "LW_Buildings_19": {
+      "name": "三珠夜总会"
+    },
+    "LW_Buildings_20": {
+      "name": "幸运女神塔"
+    },
+    "LW_Buildings_21": {
+      "name": "秩序之塔"
+    },
+    "LW_Buildings_22": {
+      "name": "指路魔牌"
+    },
+    "LW_Buildings_23": {
+      "name": "哈欠门酒馆"
+    },
+    "LW_Buildings_24": {
+      "name": "佐尔斯塔行会"
+    },
+    "UM_Buildings_01": {
+      "name": "贝尔克拉姆之墓"
+    },
+    "UM_Buildings_02": {
+      "name": "血手要塞"
+    },
+    "SP_Buildings_01": {
+      "name": "墓钥尸坊"
+    },
+    "SP_Buildings_02": {
+      "name": "深火旅馆"
+    },
+    "SP_Buildings_03": {
+      "name": "探渊者陷阱坊"
+    },
+    "UM_Buildings_03": {
+      "name": "眼魔巢穴"
+    },
+    "SP_Buildings_04": {
+      "name": "额叶秘所"
+    },
+    "UM_Buildings_04": {
+      "name": "万柱厅"
+    },
+    "UM_Buildings_05": {
+      "name": "诸王沉眠之厅"
+    },
+    "UM_Buildings_06": {
+      "name": "三领主之厅"
+    },
+    "SP_Buildings_05": {
+      "name": "地狱犬之颚酒馆"
+    },
+    "UM_Buildings_11": {
+      "name": "大公墓"
+    },
+    "UM_Buildings_07": {
+      "name": "大藏书馆"
+    },
+    "UM_Buildings_08": {
+      "name": "失落洞窟"
+    },
+    "SP_Buildings_06": {
+      "name": "怪物定制工坊"
+    },
+    "SP_Buildings_07": {
+      "name": "毒笔秘会"
+    },
+    "SP_Buildings_08": {
+      "name": "幽暗少女步行道"
+    },
+    "UM_Buildings_12": {
+      "name": "智慧之室"
+    },
+    "SP_Buildings_09": {
+      "name": "隐秘圣所"
+    },
+    "UM_Buildings_09": {
+      "name": "暮影要塞"
+    },
+    "SP_Buildings_10": {
+      "name": "斯拉丁顶尖僵尸工坊"
+    },
+    "SP_Buildings_11": {
+      "name": "辛布尔温当铺"
+    },
+    "SP_Buildings_12": {
+      "name": "铁拳飞飞飞角斗场"
+    },
+    "UM_Buildings_10": {
+      "name": "特罗布里恩德坟场"
+    }
+  }
+}
