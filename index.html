@@ -123,9 +123,9 @@
         <select id="quest"></select>
       </div>
       <div class="local-tools">
-        <button id="exportLocalReview" type="button">导出本地校对</button>
-        <button id="importLocalReview" type="button">导入本地校对</button>
-        <button id="clearLocalReview" type="button">清空本地校对</button>
+        <button id="exportLocalReview" type="button">导出本地修改</button>
+        <button id="importLocalReview" type="button">导入本地修改</button>
+        <button id="clearLocalReview" type="button">清空本地修改</button>
         <span id="localReviewCount" class="local-count"></span>
         <input id="importLocalReviewFile" type="file" accept="application/json" hidden>
       </div>
@@ -415,6 +415,18 @@
     function reviewKey(card) {
       return card?.card_scene_name || card?.card_name || "";
     }
+    function localReviewStorageKey(cardOrKey, versionId = LOCAL_REVIEW_VERSION_ID) {
+      const key = typeof cardOrKey === "string" ? cardOrKey : reviewKey(cardOrKey);
+      return versionId === LOCAL_REVIEW_VERSION_ID ? key : `${versionId}::${key}`;
+    }
+    function splitLocalReviewStorageKey(storageKey) {
+      const marker = String(storageKey || "").indexOf("::");
+      if (marker < 0) return { versionId: LOCAL_REVIEW_VERSION_ID, cardKey: storageKey };
+      return {
+        versionId: storageKey.slice(0, marker),
+        cardKey: storageKey.slice(marker + 2),
+      };
+    }
     function cleanReview(values) {
       const out = {};
       for (const field of LOCAL_REVIEW_FIELDS) {
@@ -426,11 +438,54 @@
     function hasReviewData(values) {
       return LOCAL_REVIEW_FIELDS.some(field => String(values?.[field] || "").trim());
     }
-    function localReviewFor(card) {
-      return localReviews[reviewKey(card)] || {};
+    function localReviewFor(card, versionId = LOCAL_REVIEW_VERSION_ID) {
+      return localReviews[localReviewStorageKey(card, versionId)] || {};
+    }
+    function localReviewValuesForCard(card) {
+      const key = reviewKey(card);
+      const values = [];
+      for (const [storageKey, review] of Object.entries(localReviews)) {
+        if (splitLocalReviewStorageKey(storageKey).cardKey === key) values.push(...Object.values(review || {}));
+      }
+      return values;
+    }
+    function textVersionBase(card, versionId) {
+      if (versionId === "en") {
+        return {
+          label: "英文原文",
+          source: "Unpacked Lua data",
+          name: card.card_name || "",
+          card_text: card.card_text || "",
+          possible_lore_text: card.possible_lore_text || "",
+          building_location: card.building_location || "",
+        };
+      }
+      if (versionId === LOCAL_REVIEW_VERSION_ID) return localReviewVersion(card);
+      return card.translation_versions?.[versionId] || null;
+    }
+    function mergeLocalReviewVersion(base, review, versionId) {
+      const merged = { ...(base || {}) };
+      if (!merged.label) merged.label = versionOptionLabel(versionId);
+      if (!merged.source) merged.source = "Browser localStorage";
+      for (const field of LOCAL_REVIEW_FIELDS) {
+        if (String(review?.[field] || "").trim()) merged[field] = review[field];
+      }
+      if (hasReviewData(review)) merged.local_override = true;
+      return merged;
+    }
+    function versionWithLocalOverride(card, versionId) {
+      const base = textVersionBase(card, versionId);
+      const review = localReviewFor(card, versionId);
+      if (!base && !hasReviewData(review)) return null;
+      return mergeLocalReviewVersion(base || {}, review, versionId);
+    }
+    function editableVersionId() {
+      const id = activeTextVersionValue();
+      if (!id || id === "en" || id === "compare") return LOCAL_REVIEW_VERSION_ID;
+      return id;
     }
     function localReviewVersion(card) {
-      const review = localReviewFor(card);
+      const review = localReviewFor(card, LOCAL_REVIEW_VERSION_ID);
       return {
         label: LOCAL_REVIEW_LABEL,
         source: "Browser localStorage",
@@ -441,18 +496,18 @@
       };
     }
     function defaultChineseVersion(card) {
-      return card.translation_versions?.zh_codex || Object.values(card.translation_versions || {})[0] || null;
+      if (card.translation_versions?.zh_codex) return versionWithLocalOverride(card, "zh_codex");
+      const firstId = Object.keys(card.translation_versions || {})[0];
+      return firstId ? versionWithLocalOverride(card, firstId) : null;
     }
     function editorSeed(card, versionId) {
-      if (versionId === "en") {
-        return {
-          name: card.card_name || "",
-          card_text: card.card_text || "",
-          possible_lore_text: card.possible_lore_text || "",
-          building_location: card.building_location || "",
-        };
-      }
-      return card.translation_versions?.[versionId] || {};
+      return textVersionBase(card, versionId) || {};
+    }
+    function editorPlaceholder(card, targetVersionId, field) {
+      const target = textVersionBase(card, targetVersionId) || {};
+      const fallback = defaultChineseVersion(card) || {};
+      const english = textVersionBase(card, "en") || {};
+      return target[field] || fallback[field] || english[field] || "";
     }
     function localReviewCount() {
       return Object.values(localReviews).filter(hasReviewData).length;
@@ -493,7 +548,7 @@
     }
     function preferredOwnerVersion(card) {
       if (activeTextVersionValue() === "compare") {
-        return card.translation_versions?.zh_codex || Object.values(card.translation_versions || {})[0] || null;
+        return defaultChineseVersion(card);
       }
       return selectedVersion(card);
     }
@@ -545,7 +600,7 @@
         c.quest_reward_text, c.quest_effects_text, c.quest_effects_text_zh, c.static_resources_text, c.owner_resources_text,
         c.variant_card_names?.join(" "),
         ...Object.values(c.translation_versions || {}).flatMap(v => [v.name, v.card_text, v.possible_lore_text, v.building_location]),
-        ...Object.values(localReviewFor(c))
+        ...localReviewValuesForCard(c)
       ].join(" ").toLowerCase();
     }
     function versionIds() {
@@ -572,8 +627,7 @@
     function selectedVersion(c) {
       const id = textSel.value;
       if (!id || id === "en" || id === "compare") return null;
-      if (id === LOCAL_REVIEW_VERSION_ID) return localReviewVersion(c);
-      return c.translation_versions?.[id] || null;
+      return versionWithLocalOverride(c, id);
     }
     function displayName(c) {
       const version = selectedVersion(c);
@@ -586,8 +640,10 @@
         const blocks = [
           versionBlock("英文原文", c.card_name, c.possible_lore_text, c.card_text, false, c, c.building_location)
         ];
-        for (const [id, version] of Object.entries(c.translation_versions || {})) {
-          blocks.push(versionBlock(version.label || id, version.name, version.possible_lore_text, version.card_text, true, c, version.building_location));
+        for (const [id] of Object.entries(c.translation_versions || {})) {
+          const version = versionWithLocalOverride(c, id);
+          const label = `${version.label || id}${version.local_override ? "（本地修改）" : ""}`;
+          blocks.push(versionBlock(label, version.name, version.possible_lore_text, version.card_text, true, c, version.building_location));
         }
         const localVersion = localReviewVersion(c);
         if (hasReviewData(localVersion)) {
@@ -596,7 +652,7 @@
         return blocks.join("");
       }
       const version = selectedVersion(c);
-      const fallback = textSel.value === LOCAL_REVIEW_VERSION_ID ? defaultChineseVersion(c) : null;
+      const fallback = textSel.value === "en" ? null : defaultChineseVersion(c);
       const lore = version?.possible_lore_text || fallback?.possible_lore_text || c.possible_lore_text;
       const rules = version?.card_text || fallback?.card_text || c.card_text;
       const visibleRules = rulesForDisplay(c, rules, textSel.value !== "en");
@@ -631,15 +687,17 @@
     }
     function localEditor(c) {
       const key = reviewKey(c);
-      const review = localReviewFor(c);
+      const targetVersionId = editableVersionId();
+      const targetLabel = versionOptionLabel(targetVersionId);
+      const review = localReviewFor(c, targetVersionId);
       const dirtyClass = hasReviewData(review) ? " is-dirty" : "";
-      return `<details class="local-editor${dirtyClass}" data-review-key="${escapeHtml(key)}">
-        <summary>${escapeHtml(LOCAL_REVIEW_LABEL)}</summary>
+      return `<details class="local-editor${dirtyClass}" data-review-key="${escapeHtml(key)}" data-review-version="${escapeHtml(targetVersionId)}">
+        <summary>编辑：${escapeHtml(targetLabel)}</summary>
         <div class="edit-grid">
-          <label>中文名<input data-review-field="name" value="${escapeHtml(review.name || "")}" placeholder="${escapeHtml(defaultChineseVersion(c)?.name || c.card_name || "")}"></label>
-          <label>地点<input data-review-field="building_location" value="${escapeHtml(review.building_location || "")}" placeholder="${escapeHtml(defaultChineseVersion(c)?.building_location || c.building_location || "")}"></label>
-          <label>风味文字<textarea data-review-field="possible_lore_text" placeholder="${escapeHtml(defaultChineseVersion(c)?.possible_lore_text || c.possible_lore_text || "")}">${escapeHtml(review.possible_lore_text || "")}</textarea></label>
-          <label>规则文字<textarea data-review-field="card_text" placeholder="${escapeHtml(defaultChineseVersion(c)?.card_text || c.card_text || "")}">${escapeHtml(review.card_text || "")}</textarea></label>
+          <label>中文名<input data-review-field="name" value="${escapeHtml(review.name || "")}" placeholder="${escapeHtml(editorPlaceholder(c, targetVersionId, "name") || c.card_name || "")}"></label>
+          <label>地点<input data-review-field="building_location" value="${escapeHtml(review.building_location || "")}" placeholder="${escapeHtml(editorPlaceholder(c, targetVersionId, "building_location") || c.building_location || "")}"></label>
+          <label>风味文字<textarea data-review-field="possible_lore_text" placeholder="${escapeHtml(editorPlaceholder(c, targetVersionId, "possible_lore_text") || c.possible_lore_text || "")}">${escapeHtml(review.possible_lore_text || "")}</textarea></label>
+          <label>规则文字<textarea data-review-field="card_text" placeholder="${escapeHtml(editorPlaceholder(c, targetVersionId, "card_text") || c.card_text || "")}">${escapeHtml(review.card_text || "")}</textarea></label>
           <div class="editor-actions">
             <button type="button" data-action="save-review">保存</button>
             <button type="button" data-action="clear-review">清除</button>
@@ -651,7 +709,7 @@
       </details>`;
     }
     function updateLocalReviewCount() {
-      localReviewCountEl.textContent = `本地校对：${localReviewCount()} 条`;
+      localReviewCountEl.textContent = `本地修改：${localReviewCount()} 条`;
     }
     function cardByReviewKey(key) {
       return CARDS.find(card => reviewKey(card) === key) || null;
@@ -671,14 +729,16 @@
     }
     function saveEditorReview(editor) {
       const key = editor.dataset.reviewKey;
+      const versionId = editor.dataset.reviewVersion || LOCAL_REVIEW_VERSION_ID;
+      const storageKey = localReviewStorageKey(key, versionId);
       const values = valuesFromEditor(editor);
-      if (hasReviewData(values)) localReviews[key] = values;
-      else delete localReviews[key];
+      if (hasReviewData(values)) localReviews[storageKey] = values;
+      else delete localReviews[storageKey];
       saveLocalReviews();
       render();
     }
     function clearEditorReview(editor) {
-      delete localReviews[editor.dataset.reviewKey];
+      delete localReviews[localReviewStorageKey(editor.dataset.reviewKey, editor.dataset.reviewVersion || LOCAL_REVIEW_VERSION_ID)];
       saveLocalReviews();
       render();
     }
@@ -689,16 +749,32 @@
     }
     function localReviewExportPayload() {
       const cards = {};
-      for (const [key, values] of Object.entries(localReviews)) {
+      const versions = {};
+      for (const [storageKey, values] of Object.entries(localReviews)) {
         const cleaned = cleanReview(values);
-        if (hasReviewData(cleaned)) cards[key] = cleaned;
+        if (!hasReviewData(cleaned)) continue;
+        const { versionId, cardKey } = splitLocalReviewStorageKey(storageKey);
+        if (versionId === LOCAL_REVIEW_VERSION_ID) {
+          cards[cardKey] = cleaned;
+        } else {
+          if (!versions[versionId]) {
+            versions[versionId] = {
+              version_id: versionId,
+              label: versionOptionLabel(versionId),
+              source: "Browser localStorage export from lowd_gallery",
+              cards: {},
+            };
+          }
+          versions[versionId].cards[cardKey] = cleaned;
+        }
       }
       return {
-        version_id: "zh_local_review",
-        label: LOCAL_REVIEW_LABEL,
+        schema_version: 2,
+        label: "本地修改",
         source: "Browser localStorage export from lowd_gallery",
         exported_at: new Date().toISOString(),
         cards,
+        versions,
       };
     }
     function exportLocalReviews() {
@@ -717,10 +793,20 @@
     async function importLocalReviews(file) {
       if (!file) return;
       const payload = JSON.parse(await file.text());
+      for (const [versionId, versionPayload] of Object.entries(payload.versions || {})) {
+        for (const [key, values] of Object.entries(versionPayload.cards || {})) {
+          const cleaned = cleanReview(values);
+          if (hasReviewData(cleaned)) localReviews[localReviewStorageKey(key, versionId)] = cleaned;
+        }
+      }
+      const importVersionId = payload.version_id && !["zh_local_review", LOCAL_REVIEW_VERSION_ID].includes(payload.version_id)
+        ? payload.version_id
+        : LOCAL_REVIEW_VERSION_ID;
       const incoming = payload.cards && typeof payload.cards === "object" ? payload.cards : payload;
       for (const [key, values] of Object.entries(incoming || {})) {
+        if (key === "versions" || key === "schema_version" || key === "version_id" || key === "label" || key === "source" || key === "exported_at") continue;
         const cleaned = cleanReview(values);
-        if (hasReviewData(cleaned)) localReviews[key] = cleaned;
+        if (hasReviewData(cleaned)) localReviews[localReviewStorageKey(key, importVersionId)] = cleaned;
       }
       saveLocalReviews();
       importLocalReviewFile.value = "";
@@ -776,7 +862,7 @@
       importLocalReviews(event.target.files?.[0]).catch(error => alert(`导入失败：${error.message}`));
     });
     clearLocalReviewBtn.addEventListener("click", () => {
-      if (!confirm("清空本浏览器保存的本地校对？")) return;
+      if (!confirm("清空本浏览器保存的本地修改？")) return;
       localReviews = {};
       saveLocalReviews();
       render();
