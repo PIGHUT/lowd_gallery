@@ -585,8 +585,6 @@
         if (effectText) rows.push(`<div><b>${escapeHtml(FIELD_LABELS.effect)}</b>: ${renderRichText(effectText)}</div>`);
       }
       if (card.card_type === "building") {
-        const location = buildingLocationText(card);
-        if (location) rows.push(`<div><b>${escapeHtml(FIELD_LABELS.location)}</b>: ${escapeHtml(location)}</div>`);
         rows.push(ownerMeta(card));
       }
       const body = rows.filter(Boolean).join("");
@@ -659,12 +657,11 @@
       return `${lore ? `<div class="text"><em>${escapeHtml(lore)}</em></div>` : ""}${visibleRules ? `<div class="text">${renderRichText(visibleRules)}</div>` : ""}`;
     }
     function versionBlock(label, name, lore, rules, stripOwner = false, card = null, location = "") {
-      if (!name && !lore && !rules && !location) return "";
+      if (!name && !lore && !rules) return "";
       const visibleRules = rulesForDisplay(card, rules, stripOwner);
       return `<div class="version-block">
         <div class="version-title">${escapeHtml(label)}</div>
         ${name ? `<div class="text"><b>${escapeHtml(name)}</b></div>` : ""}
-        ${location ? `<div class="text"><span>${escapeHtml(FIELD_LABELS.location)}：${escapeHtml(location)}</span></div>` : ""}
         ${lore ? `<div class="text"><em>${escapeHtml(lore)}</em></div>` : ""}
         ${visibleRules ? `<div class="text">${renderRichText(visibleRules)}</div>` : ""}
       </div>`;
@@ -695,7 +692,6 @@
         <summary>编辑：${escapeHtml(targetLabel)}</summary>
         <div class="edit-grid">
           <label>中文名<input data-review-field="name" value="${escapeHtml(review.name || "")}" placeholder="${escapeHtml(editorPlaceholder(c, targetVersionId, "name") || c.card_name || "")}"></label>
-          <label>地点<input data-review-field="building_location" value="${escapeHtml(review.building_location || "")}" placeholder="${escapeHtml(editorPlaceholder(c, targetVersionId, "building_location") || c.building_location || "")}"></label>
           <label>风味文字<textarea data-review-field="possible_lore_text" placeholder="${escapeHtml(editorPlaceholder(c, targetVersionId, "possible_lore_text") || c.possible_lore_text || "")}">${escapeHtml(review.possible_lore_text || "")}</textarea></label>
           <label>规则文字<textarea data-review-field="card_text" placeholder="${escapeHtml(editorPlaceholder(c, targetVersionId, "card_text") || c.card_text || "")}">${escapeHtml(review.card_text || "")}</textarea></label>
           <div class="editor-actions">
@@ -716,8 +712,11 @@
     }
     function valuesFromEditor(editor) {
       const values = {};
+      const storageKey = localReviewStorageKey(editor.dataset.reviewKey, editor.dataset.reviewVersion || LOCAL_REVIEW_VERSION_ID);
+      const existing = localReviews[storageKey] || {};
       for (const field of LOCAL_REVIEW_FIELDS) {
-        values[field] = editor.querySelector(`[data-review-field="${field}"]`)?.value || "";
+        const input = editor.querySelector(`[data-review-field="${field}"]`);
+        values[field] = input ? input.value : (existing[field] || "");
       }
       return cleanReview(values);
     }
