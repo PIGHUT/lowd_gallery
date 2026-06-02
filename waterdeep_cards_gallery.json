@@ -1836,7 +1836,7 @@
         "zh_codex": {
           "label": "中文校译",
           "source": "Codex building translation using locked project terminology and local DND references, 2026-05-29",
-          "name": "深火工坊",
+          "name": "深火旅馆",
           "card_text": "拿取任意 1 个冒险者、5 金币、1 个腐化，并拿取 1 张面朝上的任务卡。拥有者获得 3 VP。",
           "possible_lore_text": ""
         }
