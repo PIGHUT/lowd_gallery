@@ -384,7 +384,7 @@ collection of spellbooks.
 Acquire one, please.”",LW_Quest_08,LW_Quest_08,assets/cards/LW_Quest_08.webp,Key_StealSpellbookfromSilverhand,cards_quests.lua,,,"{""zh_codex"": {""label"": ""中文校译"", ""source"": ""Codex quest translation using locked project terminology and local DND references, 2026-05-27"", ""name"": ""窃取银手的法术书"", ""card_text"": ""抽 2 张阴谋卡。"", ""possible_lore_text"": ""“莱拉·银手收藏着一批迷人的法术书。请弄一本来。”"", ""building_location"": """"}}",窃取银手的法术书,抽 2 张阴谋卡。,“莱拉·银手收藏着一批迷人的法术书。请弄一本来。”,,,,,
 quest,base,Domesticate Owlbears,arcana,,False,,,1 cleric; 2 wizard,2 gold; 1 fighter; 8 VP,,,,,,,,"“The City Guard could use these
 reinforcements. Do they do tricks?”",LW_Quest_09,LW_Quest_09,assets/cards/LW_Quest_09.webp,Key_DomesticateOwlbears,cards_quests.lua,,,"{""zh_codex"": {""label"": ""中文校译"", ""source"": ""Codex quest translation using locked project terminology and local DND references, 2026-05-27"", ""name"": ""驯养枭熊"", ""card_text"": """", ""possible_lore_text"": ""“城市守卫联盟正需要这些增援。它们会表演把戏吗？”"", ""building_location"": """"}}",驯养枭熊,,“城市守卫联盟正需要这些增援。它们会表演把戏吗？”,,,,,
-quest,base,Ally with House Thann,commerce,,False,,,8 gold; 1 cleric; 3 rogue; 1 wizard,,,,,,,,,"House Thann, known for its strong ties
+quest,base,Ally with House Thann,commerce,,False,,,8 gold; 1 cleric; 3 rogue; 1 wizard,25 VP,,,,,,,,"House Thann, known for its strong ties
 to Blackstaff Tower, has sizeable land
 holdings in the South.",LW_Quest_10,LW_Quest_10,assets/cards/LW_Quest_10.webp,Key_AllywithHouseThann,cards_quests.lua,,,"{""zh_codex"": {""label"": ""中文校译"", ""source"": ""Codex quest translation using locked project terminology and local DND references, 2026-05-27"", ""name"": ""与坦恩家族结盟"", ""card_text"": """", ""possible_lore_text"": ""坦恩家族以同黑杖塔关系紧密而闻名，并在南方拥有可观地产。"", ""building_location"": """"}}",与坦恩家族结盟,,坦恩家族以同黑杖塔关系紧密而闻名，并在南方拥有可观地产。,,,,,
 quest,base,Impersonate Adarbrent Noble,commerce,,False,,,4 gold; 1 cleric; 2 fighter; 2 rogue; 1 wizard,18 VP,,,,,Take 2 Intrigue cards.,Draw 2 Intrigue cards.,抽 2 张阴谋卡。,"“We need a convincing portrayal of a
@@ -466,7 +466,7 @@ will fall into your hands.”",LW_Quest_36,LW_Quest_36,assets/cards/LW_Quest_36.
 quest,base,Ambush Artor Morlin,warfare,,False,,,1 cleric; 3 fighter; 1 rogue,4 gold; 8 VP,,,,,,,,"“The vampire lord Artor Morlin must be
 shown that Waterdeep is not his
 personal hunting ground.”",LW_Quest_37,LW_Quest_37,assets/cards/LW_Quest_37.webp,Key_AmbushArtorMorlin,cards_quests.lua,,,"{""zh_codex"": {""label"": ""中文校译"", ""source"": ""Codex quest translation using locked project terminology and local DND references, 2026-05-27"", ""name"": ""伏击阿托尔·莫林"", ""card_text"": """", ""possible_lore_text"": ""“必须让吸血鬼领主阿托尔·莫林明白，深水城不是他的私人猎场。”"", ""building_location"": """"}}",伏击阿托尔·莫林,,“必须让吸血鬼领主阿托尔·莫林明白，深水城不是他的私人猎场。”,,,,,
-quest,base,Bolster City Guard,warfare,,False,,,9 fighter; 2 rogue,,,,,,,,,"“The City Guard must remain
+quest,base,Bolster City Guard,warfare,,False,,,9 fighter; 2 rogue,25 VP,,,,,,,,"“The City Guard must remain
 strong.
   Send a regiment
 to shore up its forces.”",LW_Quest_38,LW_Quest_38,assets/cards/LW_Quest_38.webp,Key_BolsterCityGuard,cards_quests.lua,,,"{""zh_codex"": {""label"": ""中文校译"", ""source"": ""Codex quest translation using locked project terminology and local DND references, 2026-05-27"", ""name"": ""壮大城市守卫联盟"", ""card_text"": """", ""possible_lore_text"": ""“城市守卫联盟必须保持强大。派一个团去增补他们的兵力。”"", ""building_location"": """"}}",壮大城市守卫联盟,,“城市守卫联盟必须保持强大。派一个团去增补他们的兵力。”,,,,,
