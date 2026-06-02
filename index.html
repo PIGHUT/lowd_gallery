@@ -47,7 +47,12 @@
     h1 { margin: 0; color: #fff6dc; font-size: clamp(22px, 2.6vw, 34px); font-weight: 800; letter-spacing: 0; text-shadow: 0 2px 0 rgba(0, 0, 0, .28); }
     .subtitle { color: rgba(255, 236, 184, .82); font-size: 12px; font-weight: 800; }
     .controls { display: grid; grid-template-columns: minmax(260px, 1.4fr) minmax(150px, .72fr) repeat(3, minmax(128px, .55fr)); gap: 8px; }
-    input, select { width: 100%; min-height: 40px; border: 1px solid rgba(104, 74, 43, .46); background: rgba(255, 250, 232, .96); color: var(--ink); border-radius: 6px; padding: 0 10px; font-size: 14px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45); }
+    .local-tools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    input, select, textarea { width: 100%; min-height: 40px; border: 1px solid rgba(104, 74, 43, .46); background: rgba(255, 250, 232, .96); color: var(--ink); border-radius: 6px; padding: 0 10px; font-size: 14px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45); }
+    textarea { min-height: 74px; padding: 8px 10px; resize: vertical; line-height: 1.45; }
+    button { min-height: 34px; border: 1px solid rgba(239, 204, 122, .45); border-radius: 6px; background: rgba(255, 247, 223, .9); color: #3b281d; padding: 0 10px; font-size: 12px; font-weight: 850; cursor: pointer; box-shadow: 0 1px 0 rgba(255,255,255,.35); }
+    button:hover { background: #fff4ce; }
+    .local-count { color: rgba(255, 236, 184, .84); font-size: 12px; font-weight: 800; }
     input::placeholder { color: rgba(86, 67, 51, .68); }
     main { position: relative; max-width: 1480px; width: min(1480px, calc(100vw - 28px)); margin: 0 auto; padding: 18px 0 34px; }
     .summary { color: #fff1c3; font-size: 13px; font-weight: 700; margin-bottom: 12px; text-shadow: 0 1px 0 rgba(0,0,0,.3); }
@@ -89,6 +94,13 @@
     .kv b { color: #8b5c24; font-weight: 800; }
     .version-block { border-top: 1px dashed rgba(138, 106, 63, .5); padding-top: 7px; display: grid; gap: 5px; }
     .version-title { color: #2f6b46; font-size: 12px; font-weight: 800; }
+    .local-editor { border-top: 1px dashed rgba(138, 106, 63, .5); padding-top: 7px; }
+    .card.has-img .local-editor { grid-column: 1 / -1; }
+    .local-editor summary { cursor: pointer; color: #7d2e22; font-size: 12px; font-weight: 900; list-style-position: inside; }
+    .local-editor.is-dirty summary::after { content: " *"; color: #2f6b46; }
+    .edit-grid { display: grid; gap: 7px; margin-top: 7px; }
+    .edit-grid label { display: grid; gap: 3px; color: #6f5035; font-size: 11px; font-weight: 850; }
+    .editor-actions { display: flex; gap: 6px; flex-wrap: wrap; }
     .raw { color: #7a6149; font-size: 11px; max-height: 52px; overflow: auto; border-top: 1px dashed rgba(138, 106, 63, .44); padding-top: 7px; }
     mark { background: #fff1a8; padding: 0 1px; }
     @media (max-width: 720px) {
@@ -110,6 +122,13 @@
         <select id="set"></select>
         <select id="quest"></select>
       </div>
+      <div class="local-tools">
+        <button id="exportLocalReview" type="button">导出本地校对</button>
+        <button id="importLocalReview" type="button">导入本地校对</button>
+        <button id="clearLocalReview" type="button">清空本地校对</button>
+        <span id="localReviewCount" class="local-count"></span>
+        <input id="importLocalReviewFile" type="file" accept="application/json" hidden>
+      </div>
     </div>
   </header>
   <main>
@@ -125,6 +144,11 @@
     const questSel = document.querySelector("#quest");
     const grid = document.querySelector("#grid");
     const summary = document.querySelector("#summary");
+    const exportLocalReviewBtn = document.querySelector("#exportLocalReview");
+    const importLocalReviewBtn = document.querySelector("#importLocalReview");
+    const clearLocalReviewBtn = document.querySelector("#clearLocalReview");
+    const importLocalReviewFile = document.querySelector("#importLocalReviewFile");
+    const localReviewCountEl = document.querySelector("#localReviewCount");
 
     function uniq(key) {
       return Array.from(new Set(CARDS.map(c => c[key]).filter(Boolean))).sort();
@@ -333,6 +357,11 @@
       source: "来源",
       cost: "售价",
     };
+    const LOCAL_REVIEW_VERSION_ID = "local_review";
+    const LOCAL_REVIEW_LABEL = "本地校对";
+    const LOCAL_REVIEW_STORAGE_KEY = "lowd_gallery_local_review_v1";
+    const LOCAL_REVIEW_FIELDS = ["name", "card_text", "possible_lore_text", "building_location"];
+    let localReviews = loadLocalReviews();
     function labelFor(kind, value) {
       if (value === null || value === undefined || value === "") return "";
       return UI_LABELS[kind]?.[value] || String(value);
@@ -352,6 +381,7 @@
     function versionOptionLabel(id) {
       if (id === "en") return "英文原文";
       if (id === "compare") return "版本对照";
+      if (id === LOCAL_REVIEW_VERSION_ID) return LOCAL_REVIEW_LABEL;
       return versionLabel(id);
     }
     function textVersionSelect() {
@@ -369,6 +399,62 @@
     }
     function activeTextVersionValue() {
       return textVersionSelect()?.value || "";
+    }
+    function loadLocalReviews() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(LOCAL_REVIEW_STORAGE_KEY) || "{}");
+        return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+      } catch {
+        return {};
+      }
+    }
+    function saveLocalReviews() {
+      localStorage.setItem(LOCAL_REVIEW_STORAGE_KEY, JSON.stringify(localReviews));
+    }
+    function reviewKey(card) {
+      return card?.card_scene_name || card?.card_name || "";
+    }
+    function cleanReview(values) {
+      const out = {};
+      for (const field of LOCAL_REVIEW_FIELDS) {
+        const value = String(values?.[field] || "").trim();
+        if (value) out[field] = value;
+      }
+      return out;
+    }
+    function hasReviewData(values) {
+      return LOCAL_REVIEW_FIELDS.some(field => String(values?.[field] || "").trim());
+    }
+    function localReviewFor(card) {
+      return localReviews[reviewKey(card)] || {};
+    }
+    function localReviewVersion(card) {
+      const review = localReviewFor(card);
+      return {
+        label: LOCAL_REVIEW_LABEL,
+        source: "Browser localStorage",
+        name: review.name || "",
+        card_text: review.card_text || "",
+        possible_lore_text: review.possible_lore_text || "",
+        building_location: review.building_location || "",
+      };
+    }
+    function defaultChineseVersion(card) {
+      return card.translation_versions?.zh_codex || Object.values(card.translation_versions || {})[0] || null;
+    }
+    function editorSeed(card, versionId) {
+      if (versionId === "en") {
+        return {
+          name: card.card_name || "",
+          card_text: card.card_text || "",
+          possible_lore_text: card.possible_lore_text || "",
+          building_location: card.building_location || "",
+        };
+      }
+      return card.translation_versions?.[versionId] || {};
+    }
+    function localReviewCount() {
+      return Object.values(localReviews).filter(hasReviewData).length;
     }
     function joinSentenceChunks(chunks) {
       let out = "";
@@ -422,6 +508,9 @@
     function buildingLocationText(card) {
       if (card.card_type !== "building") return "";
       const version = selectedVersion(card);
+      if (textVersionSelect()?.value === LOCAL_REVIEW_VERSION_ID) {
+        return version?.building_location || defaultChineseVersion(card)?.building_location || card.building_location || "";
+      }
       return version?.building_location || card.building_location || "";
     }
     function metaBlock(card) {
@@ -444,13 +533,17 @@
         c.quest_type, c.intrigue_type, c.card_text, c.possible_lore_text, c.quest_requirement_text,
         c.quest_reward_text, c.static_resources_text, c.owner_resources_text,
         c.variant_card_names?.join(" "),
-        ...Object.values(c.translation_versions || {}).flatMap(v => [v.name, v.card_text, v.possible_lore_text])
+        ...Object.values(c.translation_versions || {}).flatMap(v => [v.name, v.card_text, v.possible_lore_text, v.building_location]),
+        ...Object.values(localReviewFor(c))
       ].join(" ").toLowerCase();
     }
     function versionIds() {
-      return Array.from(new Set(CARDS.flatMap(c => Object.keys(c.translation_versions || {})))).sort();
+      const ids = Array.from(new Set(CARDS.flatMap(c => Object.keys(c.translation_versions || {})))).sort();
+      if (!ids.includes(LOCAL_REVIEW_VERSION_ID)) ids.push(LOCAL_REVIEW_VERSION_ID);
+      return ids;
     }
     function versionLabel(id) {
+      if (id === LOCAL_REVIEW_VERSION_ID) return LOCAL_REVIEW_LABEL;
       for (const card of CARDS) {
         const label = card.translation_versions?.[id]?.label;
         if (label) return label;
@@ -468,33 +561,43 @@
     function selectedVersion(c) {
       const id = textSel.value;
       if (!id || id === "en" || id === "compare") return null;
+      if (id === LOCAL_REVIEW_VERSION_ID) return localReviewVersion(c);
       return c.translation_versions?.[id] || null;
     }
     function displayName(c) {
-      return selectedVersion(c)?.name || c.card_name;
+      const version = selectedVersion(c);
+      if (version?.name) return version.name;
+      if (textSel.value === LOCAL_REVIEW_VERSION_ID) return defaultChineseVersion(c)?.name || c.card_name;
+      return c.card_name;
     }
     function displayTextBlocks(c) {
       if (textSel.value === "compare") {
         const blocks = [
-          versionBlock("英文原文", c.card_name, c.possible_lore_text, c.card_text, false, c)
+          versionBlock("英文原文", c.card_name, c.possible_lore_text, c.card_text, false, c, c.building_location)
         ];
         for (const [id, version] of Object.entries(c.translation_versions || {})) {
-          blocks.push(versionBlock(version.label || id, version.name, version.possible_lore_text, version.card_text, true, c));
+          blocks.push(versionBlock(version.label || id, version.name, version.possible_lore_text, version.card_text, true, c, version.building_location));
+        }
+        const localVersion = localReviewVersion(c);
+        if (hasReviewData(localVersion)) {
+          blocks.push(versionBlock(localVersion.label, localVersion.name, localVersion.possible_lore_text, localVersion.card_text, true, c, localVersion.building_location));
         }
         return blocks.join("");
       }
       const version = selectedVersion(c);
-      const lore = version?.possible_lore_text ?? c.possible_lore_text;
-      const rules = version?.card_text ?? c.card_text;
+      const fallback = textSel.value === LOCAL_REVIEW_VERSION_ID ? defaultChineseVersion(c) : null;
+      const lore = version?.possible_lore_text || fallback?.possible_lore_text || c.possible_lore_text;
+      const rules = version?.card_text || fallback?.card_text || c.card_text;
       const visibleRules = rulesForDisplay(c, rules, textSel.value !== "en");
       return `${lore ? `<div class="text"><em>${escapeHtml(lore)}</em></div>` : ""}${visibleRules ? `<div class="text">${renderRichText(visibleRules)}</div>` : ""}`;
     }
-    function versionBlock(label, name, lore, rules, stripOwner = false, card = null) {
-      if (!name && !lore && !rules) return "";
+    function versionBlock(label, name, lore, rules, stripOwner = false, card = null, location = "") {
+      if (!name && !lore && !rules && !location) return "";
       const visibleRules = rulesForDisplay(card, rules, stripOwner);
       return `<div class="version-block">
         <div class="version-title">${escapeHtml(label)}</div>
         ${name ? `<div class="text"><b>${escapeHtml(name)}</b></div>` : ""}
+        ${location ? `<div class="text"><span>${escapeHtml(FIELD_LABELS.location)}：${escapeHtml(location)}</span></div>` : ""}
         ${lore ? `<div class="text"><em>${escapeHtml(lore)}</em></div>` : ""}
         ${visibleRules ? `<div class="text">${renderRichText(visibleRules)}</div>` : ""}
       </div>`;
@@ -515,6 +618,103 @@
       const body = Array.isArray(tokens) && tokens.length ? renderResourceTokens(tokens) : renderRichText(fallback || "");
       return body ? `<div><b>${escapeHtml(label)}</b>: ${body}</div>` : "";
     }
+    function localEditor(c) {
+      const key = reviewKey(c);
+      const review = localReviewFor(c);
+      const dirtyClass = hasReviewData(review) ? " is-dirty" : "";
+      return `<details class="local-editor${dirtyClass}" data-review-key="${escapeHtml(key)}">
+        <summary>${escapeHtml(LOCAL_REVIEW_LABEL)}</summary>
+        <div class="edit-grid">
+          <label>中文名<input data-review-field="name" value="${escapeHtml(review.name || "")}" placeholder="${escapeHtml(defaultChineseVersion(c)?.name || c.card_name || "")}"></label>
+          <label>地点<input data-review-field="building_location" value="${escapeHtml(review.building_location || "")}" placeholder="${escapeHtml(defaultChineseVersion(c)?.building_location || c.building_location || "")}"></label>
+          <label>风味文字<textarea data-review-field="possible_lore_text" placeholder="${escapeHtml(defaultChineseVersion(c)?.possible_lore_text || c.possible_lore_text || "")}">${escapeHtml(review.possible_lore_text || "")}</textarea></label>
+          <label>规则文字<textarea data-review-field="card_text" placeholder="${escapeHtml(defaultChineseVersion(c)?.card_text || c.card_text || "")}">${escapeHtml(review.card_text || "")}</textarea></label>
+          <div class="editor-actions">
+            <button type="button" data-action="save-review">保存</button>
+            <button type="button" data-action="clear-review">清除</button>
+            <button type="button" data-action="seed-review" data-seed-version="zh_codex">填入中文校译</button>
+            <button type="button" data-action="seed-review" data-seed-version="zh_printed">填入印刷版</button>
+            <button type="button" data-action="seed-review" data-seed-version="en">填入英文</button>
+          </div>
+        </div>
+      </details>`;
+    }
+    function updateLocalReviewCount() {
+      localReviewCountEl.textContent = `本地校对：${localReviewCount()} 条`;
+    }
+    function cardByReviewKey(key) {
+      return CARDS.find(card => reviewKey(card) === key) || null;
+    }
+    function valuesFromEditor(editor) {
+      const values = {};
+      for (const field of LOCAL_REVIEW_FIELDS) {
+        values[field] = editor.querySelector(`[data-review-field="${field}"]`)?.value || "";
+      }
+      return cleanReview(values);
+    }
+    function setEditorValues(editor, values) {
+      for (const field of LOCAL_REVIEW_FIELDS) {
+        const input = editor.querySelector(`[data-review-field="${field}"]`);
+        if (input) input.value = values?.[field] || "";
+      }
+    }
+    function saveEditorReview(editor) {
+      const key = editor.dataset.reviewKey;
+      const values = valuesFromEditor(editor);
+      if (hasReviewData(values)) localReviews[key] = values;
+      else delete localReviews[key];
+      saveLocalReviews();
+      render();
+    }
+    function clearEditorReview(editor) {
+      delete localReviews[editor.dataset.reviewKey];
+      saveLocalReviews();
+      render();
+    }
+    function seedEditorReview(editor, versionId) {
+      const card = cardByReviewKey(editor.dataset.reviewKey);
+      if (!card) return;
+      setEditorValues(editor, editorSeed(card, versionId));
+    }
+    function localReviewExportPayload() {
+      const cards = {};
+      for (const [key, values] of Object.entries(localReviews)) {
+        const cleaned = cleanReview(values);
+        if (hasReviewData(cleaned)) cards[key] = cleaned;
+      }
+      return {
+        version_id: "zh_local_review",
+        label: LOCAL_REVIEW_LABEL,
+        source: "Browser localStorage export from lowd_gallery",
+        exported_at: new Date().toISOString(),
+        cards,
+      };
+    }
+    function exportLocalReviews() {
+      const payload = localReviewExportPayload();
+      const stamp = new Date().toISOString().slice(0, 10).replaceAll("-", "");
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `waterdeep_local_review_${stamp}.json`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+    async function importLocalReviews(file) {
+      if (!file) return;
+      const payload = JSON.parse(await file.text());
+      const incoming = payload.cards && typeof payload.cards === "object" ? payload.cards : payload;
+      for (const [key, values] of Object.entries(incoming || {})) {
+        const cleaned = cleanReview(values);
+        if (hasReviewData(cleaned)) localReviews[key] = cleaned;
+      }
+      saveLocalReviews();
+      importLocalReviewFile.value = "";
+      render();
+    }
     function render() {
       const term = q.value.trim().toLowerCase();
       let rows = CARDS.filter(c => {
@@ -525,6 +725,7 @@
         return true;
       });
       summary.textContent = `${rows.length} / ${CARDS.length} 张卡牌`;
+      updateLocalReviewCount();
       grid.innerHTML = rows.map(c => `
         <article class="card ${c.image_file ? "has-img" : ""}">
           ${c.image_file ? `<img class="thumb" src="${escapeHtml(c.image_file)}" alt="">` : ""}
@@ -536,6 +737,7 @@
           ${c.variant_count > 1 ? `<div class="kv"><div><b>${FIELD_LABELS.variants}</b>: ${escapeHtml(c.variant_card_names.join(", "))}</div></div>` : ""}
           ${metaBlock(c)}
           ${displayTextBlocks(c)}
+          ${localEditor(c)}
           <div class="raw">
             ${FIELD_LABELS.image}: ${escapeHtml(c.image_large_id || "-")} · ${FIELD_LABELS.key}: ${escapeHtml(c.display_name || "-")} · ${FIELD_LABELS.source}: ${escapeHtml(c.source_file)}
           </div>
@@ -547,6 +749,27 @@
     fillTranslated(questSel, "全部任务类型", uniq("quest_type"), "quest_type");
     fillTextVersions();
     [q, textSel, typeSel, setSel, questSel].forEach(el => el.addEventListener("input", render));
+    grid.addEventListener("click", event => {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+      const editor = button.closest(".local-editor");
+      if (!editor) return;
+      const action = button.dataset.action;
+      if (action === "save-review") saveEditorReview(editor);
+      else if (action === "clear-review") clearEditorReview(editor);
+      else if (action === "seed-review") seedEditorReview(editor, button.dataset.seedVersion || "zh_codex");
+    });
+    exportLocalReviewBtn.addEventListener("click", exportLocalReviews);
+    importLocalReviewBtn.addEventListener("click", () => importLocalReviewFile.click());
+    importLocalReviewFile.addEventListener("change", event => {
+      importLocalReviews(event.target.files?.[0]).catch(error => alert(`导入失败：${error.message}`));
+    });
+    clearLocalReviewBtn.addEventListener("click", () => {
+      if (!confirm("清空本浏览器保存的本地校对？")) return;
+      localReviews = {};
+      saveLocalReviews();
+      render();
+    });
     render();
   </script>
 </body>
